@@ -3,12 +3,20 @@ const User = require('./models/User');
 const Project = require('./models/Project');
 const Task = require('./models/Task');
 
-const userId = '6a0817fdfbd2b65c4d7cb8a9';
+require('dotenv').config();
 
 const seedData = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/taskmanager');
+    const uri = process.env.MONGO_URI || process.env.MONGO_URL || 'mongodb://localhost:27017/taskmanager';
+    await mongoose.connect(uri);
     console.log('Connected to DB');
+
+    const firstUser = await User.findOne();
+    if (!firstUser) {
+      console.error("❌ No users found in database! Please register an account on the website first.");
+      process.exit(1);
+    }
+    const userId = firstUser._id;
 
     // Clear existing projects and tasks for this user
     await Project.deleteMany({});
