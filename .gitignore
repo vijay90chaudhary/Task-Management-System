@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# MacOS
+.DS_Store
+
+# Frontend build
+frontend/dist/
+frontend/dist-ssr/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
